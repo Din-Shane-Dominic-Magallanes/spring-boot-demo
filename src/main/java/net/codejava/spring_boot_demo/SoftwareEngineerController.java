@@ -20,8 +20,8 @@ public class SoftwareEngineerController {
     }
 
     @GetMapping("{id}")
-    public List<SoftwareEngineer> getEngineerById(@PathVariable Integer id) {
-        return softwareEngineerService.getAllSoftwareEngineers();
+    public SoftwareEngineer getEngineerById(@PathVariable Integer id) {
+        return softwareEngineerService.getSoftwareEngineerById(id);
     }
 
     @PostMapping
