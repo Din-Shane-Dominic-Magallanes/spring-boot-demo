@@ -1,8 +1,6 @@
 package net.codejava.spring_boot_demo;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -10,20 +8,25 @@ import java.util.List;
 @RequestMapping("api/v1/software-engineers")
 public class SoftwareEngineerController {
 
+    private final SoftwareEngineerService softwareEngineerService;
+
+    public SoftwareEngineerController(SoftwareEngineerService softwareEngineerService) {
+        this.softwareEngineerService = softwareEngineerService;
+    }
+
     @GetMapping
     public List<SoftwareEngineer> getEngineer() {
-        return List.of(
-                new SoftwareEngineer(
-                        1,
-                        "Allana",
-                        "js, node, react, tailwindcss"
-                ),
-                new SoftwareEngineer(
-                        2,
-                        "Din",
-                        "java, spring, springboot"
-                )
-        );
+        return softwareEngineerService.getAllSoftwareEngineers();
+    }
+
+    @GetMapping("{id}")
+    public List<SoftwareEngineer> getEngineerById(@PathVariable Integer id) {
+        return softwareEngineerService.getAllSoftwareEngineers();
+    }
+
+    @PostMapping
+    public void addNewSoftwareEngineer(@RequestBody SoftwareEngineer softwareEngineer) {
+        softwareEngineerService.insertSoftwareEngineer(softwareEngineer);
     }
 
 }
