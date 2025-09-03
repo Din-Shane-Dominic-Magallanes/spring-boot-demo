@@ -45,6 +45,8 @@ public class SoftwareEngineerService {
     }
 
     public void removeSoftwareEngineer(Integer id) {
-        softwareEngineerRepository.findById(id);
+        SoftwareEngineer softwareEngineer = softwareEngineerRepository.findById(id).orElseThrow(() -> new IllegalStateException(id+" not found"));
+
+            softwareEngineerRepository.delete(softwareEngineer);
     }
 }
